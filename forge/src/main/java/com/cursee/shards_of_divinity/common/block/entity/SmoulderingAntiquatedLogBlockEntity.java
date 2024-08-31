@@ -23,27 +23,31 @@ public class SmoulderingAntiquatedLogBlockEntity extends BlockEntity {
         super(ModBlockEntitiesForge.SMOULDERING_ANTIQUATED_LOG_BLOCK_ENTITY.get(), pPos, pBlockState);
     }
 
-    public void tick(Level pLevel1, BlockPos pPos, BlockState pState1) {
-//        RandomSource randomsource = pLevel1.getRandom();
-//        SimpleParticleType simpleparticletype = ParticleTypes.CAMPFIRE_SIGNAL_SMOKE;
-//        pLevel1.addAlwaysVisibleParticle(simpleparticletype, true, (double)pPos.getX() + 0.5D + randomsource.nextDouble() / 3.0D * (double)(randomsource.nextBoolean() ? 1 : -1), (double)pPos.getY() + randomsource.nextDouble() + randomsource.nextDouble(), (double)pPos.getZ() + 0.5D + randomsource.nextDouble() / 3.0D * (double)(randomsource.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
-//        pLevel1.addParticle(ParticleTypes.SMOKE, (double) pPos.getX() + 0.5D + randomsource.nextDouble() / 4.0D * (double) (randomsource.nextBoolean() ? 1 : -1), (double) pPos.getY() + 0.4D, (double) pPos.getZ() + 0.5D + randomsource.nextDouble() / 4.0D * (double) (randomsource.nextBoolean() ? 1 : -1), 0.0D, 0.005D, 0.0D);
+//    public void tick(Level pLevel1, BlockPos pPos, BlockState pState1) {
+////        RandomSource randomsource = pLevel1.getRandom();
+////        SimpleParticleType simpleparticletype = ParticleTypes.CAMPFIRE_SIGNAL_SMOKE;
+////        pLevel1.addAlwaysVisibleParticle(simpleparticletype, true, (double)pPos.getX() + 0.5D + randomsource.nextDouble() / 3.0D * (double)(randomsource.nextBoolean() ? 1 : -1), (double)pPos.getY() + randomsource.nextDouble() + randomsource.nextDouble(), (double)pPos.getZ() + 0.5D + randomsource.nextDouble() / 3.0D * (double)(randomsource.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
+////        pLevel1.addParticle(ParticleTypes.SMOKE, (double) pPos.getX() + 0.5D + randomsource.nextDouble() / 4.0D * (double) (randomsource.nextBoolean() ? 1 : -1), (double) pPos.getY() + 0.4D, (double) pPos.getZ() + 0.5D + randomsource.nextDouble() / 4.0D * (double) (randomsource.nextBoolean() ? 1 : -1), 0.0D, 0.005D, 0.0D);
+//
+//        System.out.println("ticking");
+//    }
 
-        System.out.println("ticking");
+    public void tick() {
+        System.out.println("ticking on block entity!");
     }
 
-    @Override
-    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
-
-    @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        super.onDataPacket(net, pkt);
-    }
-
-    @Override
-    public @NotNull CompoundTag getUpdateTag() {
-        return this.saveWithoutMetadata();
-    }
+//    @Override
+//    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
+//        return ClientboundBlockEntityDataPacket.create(this);
+//    }
+//
+//    @Override
+//    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+//        super.onDataPacket(net, pkt);
+//    }
+//
+//    @Override
+//    public @NotNull CompoundTag getUpdateTag() {
+//        return this.saveWithoutMetadata();
+//    }
 }

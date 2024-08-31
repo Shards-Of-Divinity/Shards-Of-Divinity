@@ -11,6 +11,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -20,7 +21,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class SmoulderingAntiquatedLogBlock extends BaseEntityBlock {
+public class SmoulderingAntiquatedLogBlock extends Block implements EntityBlock {
 
     public SmoulderingAntiquatedLogBlock(Properties pProperties) {
         super(pProperties);
@@ -28,28 +29,29 @@ public class SmoulderingAntiquatedLogBlock extends BaseEntityBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new SmoulderingAntiquatedLogBlockEntity(pPos, pState);
+//        return new SmoulderingAntiquatedLogBlockEntity(pPos, pState);
+        return ModBlockEntitiesForge.SMOULDERING_ANTIQUATED_LOG_BLOCK_ENTITY.get().create(pPos, pState);
     }
 
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
 
-        if (pLevel.isClientSide()) {
-            return null;
-        }
-
-        return createTickerHelper(pBlockEntityType, ModBlockEntitiesForge.SMOULDERING_ANTIQUATED_LOG_BLOCK_ENTITY.get(), ((pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1)));
+        return pLevel.isClientSide() ? null : (pLevel1, pPos, pState1, pBlockEntity) -> {
+            if (pBlockEntity instanceof SmoulderingAntiquatedLogBlockEntity log) {
+                log.tick();
+            }
+        };
     }
 
-    @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return Block.box(0,0,0,16,16,16);
-    }
-
-    @Override
-    public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
-    }
+//    @Override
+//    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+//        return Block.box(0,0,0,16,16,16);
+//    }
+//
+//    @Override
+//    public RenderShape getRenderShape(BlockState pState) {
+//        return RenderShape.MODEL;
+//    }
 
 //    @Override
 //    public void animateTick(BlockState pState, Level pLevel1, BlockPos pPos, RandomSource pRandom) {

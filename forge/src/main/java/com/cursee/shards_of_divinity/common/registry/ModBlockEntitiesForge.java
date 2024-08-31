@@ -9,5 +9,5 @@ public class ModBlockEntitiesForge {
     public static void register() {}
 
     public static final RegistryObject<BlockEntityType<SmoulderingAntiquatedLogBlockEntity>> SMOULDERING_ANTIQUATED_LOG_BLOCK_ENTITY =
-            RegistryForge.registerBlockEntityType("smouldering_antiquated_log_block_entity", () -> BlockEntityType.Builder.of(SmoulderingAntiquatedLogBlockEntity::new, ModBlocksForge.ANTIQUATED_LOG.get()).build(null));
+            RegistryForge.BLOCK_ENTITY_TYPES.register("smouldering_antiquated_log", () -> BlockEntityType.Builder.of(SmoulderingAntiquatedLogBlockEntity::new, ModBlocksForge.SMOULDERING_ANTIQUATED_LOG.get()).build(null));
 }

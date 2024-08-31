@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "shards_of_divinity:block/antiquated_log_top",
+    "side": "shards_of_divinity:block/antiquated_log_side"
+  }
+}
