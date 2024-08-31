@@ -4,7 +4,10 @@
     "package": "com.cursee.shards_of_divinity.mixin",
     "refmap": "${mod_id}.refmap.json",
     "compatibilityLevel": "JAVA_17",
-    "mixins": [],
+    "mixins": [
+        "ForgeBaseFireBlockMixin",
+        "ForgeFireBlockMixin"
+    ],
     "client": [],
     "server": [],
     "injectors": {
