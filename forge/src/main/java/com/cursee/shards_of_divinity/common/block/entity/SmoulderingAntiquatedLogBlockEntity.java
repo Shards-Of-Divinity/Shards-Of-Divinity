@@ -1,23 +1,30 @@
 package com.cursee.shards_of_divinity.common.block.entity;
 
+import com.cursee.shards_of_divinity.common.block.basic.SmoulderingAntiquatedLogBlock;
 import com.cursee.shards_of_divinity.common.registry.ModBlockEntitiesForge;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.util.RandomSource;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.CampfireBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class SmoulderingAntiquatedLogBlockEntity extends BlockEntity {
+
+    private static final String TICK_AGE_ID = "tickAge";
+    private static final int tickAgeDelay = 100;
+
+    public int tickAge = 0;
+
 
     public SmoulderingAntiquatedLogBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntitiesForge.SMOULDERING_ANTIQUATED_LOG_BLOCK_ENTITY.get(), pPos, pBlockState);
@@ -33,10 +40,60 @@ public class SmoulderingAntiquatedLogBlockEntity extends BlockEntity {
 //    }
 
     public void tick() {
-        System.out.println("ticking on block entity!");
+
+        if (this.level == null) return;
+
+        final Level level = this.level;
+        final BlockPos pos = this.worldPosition;
+
+        final BlockState blockEntityBlockState = level.getBlockState(pos);
+
+        final int ageValue = blockEntityBlockState.getValue(SmoulderingAntiquatedLogBlock.AGE);
+
+        if (ageValue < SmoulderingAntiquatedLogBlock.MAX_AGE) {
+
+            if (this.tickAge >= SmoulderingAntiquatedLogBlockEntity.tickAgeDelay - level.random.nextInt(50)) {
+                level.setBlock(pos, blockEntityBlockState.trySetValue(SmoulderingAntiquatedLogBlock.AGE, ageValue + 1), Block.UPDATE_ALL);
+                this.tickAge = 0;
+                this.setChanged();
+            }
+
+            this.tickAge++;
+            this.setChanged();
+        }
+        else {
+
+            if (this.tickAge >= SmoulderingAntiquatedLogBlockEntity.tickAgeDelay - level.random.nextInt(50)) {
+                level.playSound(null, pos, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 0.2f, 0.2f);
+                final LightningBolt bolt = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
+                bolt.moveTo(pos.getX(), pos.getY(), pos.getZ());
+                level.addFreshEntity(bolt);
+                level.destroyBlock(pos, false, null, 0);
+            }
+
+            this.tickAge++;
+            this.setChanged();
+        }
     }
 
-//    @Override
+    @Override
+    protected void saveAdditional(CompoundTag pTag) {
+        pTag.putInt(TICK_AGE_ID, this.tickAge);
+        super.saveAdditional(pTag);
+    }
+
+    @Override
+    public void load(CompoundTag pTag) {
+        super.load(pTag);
+        this.tickAge = pTag.getInt(TICK_AGE_ID);
+    }
+
+    // Referenced by the renderer to determine which faces to show.
+    public boolean shouldRenderFace(Direction pFace) {
+        return pFace.getAxis() == Direction.Axis.X || pFace.getAxis() == Direction.Axis.Y || pFace.getAxis() == Direction.Axis.Z;
+    }
+
+    //    @Override
 //    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
 //        return ClientboundBlockEntityDataPacket.create(this);
 //    }

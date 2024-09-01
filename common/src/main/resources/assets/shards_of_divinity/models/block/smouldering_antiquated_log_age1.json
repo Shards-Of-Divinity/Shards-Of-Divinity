@@ -1,12 +1,12 @@
 {
   "textures": {
-    "particle": "shards_of_divinity:block/smouldering_antiquated_log_side",
-    "end": "shards_of_divinity:block/smouldering_antiquated_log_top",
-    "side": "shards_of_divinity:block/smouldering_antiquated_log_side"
+    "particle": "shards_of_divinity:block/smouldering_antiquated_log_side_age1",
+    "end": "shards_of_divinity:block/smouldering_antiquated_log_top_age1",
+    "side": "shards_of_divinity:block/smouldering_antiquated_log_side_age1"
   },
   "elements": [
-    {   "from": [ 0, 0, 0 ],
-      "to": [ 16, 16, 16 ],
+    {   "from": [ 2, 0, 2 ],
+      "to": [ 14, 16, 14 ],
       "faces": {
         "down":  { "texture": "#end" },
         "up":    { "texture": "#end" },

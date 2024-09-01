@@ -1,5 +1,11 @@
 {
   "itemGroup.shardsOfDivinity": "Shards of Divinity",
 
+  "item.shards_of_divinity.amalgamated_essence": "Amalgamated Essence",
+  "item.shards_of_divinity.ashes_of_creation": "Ashes of Creation",
+
+  "block.shards_of_divinity.antiquated_log": "Antiquated Log",
+  "block.shards_of_divinity.smouldering_antiquated_log": "Smouldering Antiquated Log",
+
   "message.shards_of_divinity.antiquated_log": "What a strange log..."
 }
