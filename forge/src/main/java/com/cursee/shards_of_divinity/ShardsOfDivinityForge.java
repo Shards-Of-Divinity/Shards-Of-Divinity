@@ -1,7 +1,7 @@
 package com.cursee.shards_of_divinity;
 
 import com.cursee.shards_of_divinity.client.block.entity.renderer.SmoulderingAntiquatedLogBlockEntityRenderer;
-import com.cursee.shards_of_divinity.common.registry.ModBlockEntitiesForge;
+import com.cursee.shards_of_divinity.common.registry.ModBlockEntityTypesForge;
 import com.cursee.shards_of_divinity.common.registry.RegistryForge;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -28,7 +28,7 @@ public class ShardsOfDivinityForge {
 
         @SubscribeEvent
         public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-            event.registerBlockEntityRenderer(ModBlockEntitiesForge.SMOULDERING_ANTIQUATED_LOG_BLOCK_ENTITY.get(), SmoulderingAntiquatedLogBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntityTypesForge.SMOULDERING_ANTIQUATED_LOG_BLOCK_ENTITY.get(), SmoulderingAntiquatedLogBlockEntityRenderer::new);
         }
     }
 }

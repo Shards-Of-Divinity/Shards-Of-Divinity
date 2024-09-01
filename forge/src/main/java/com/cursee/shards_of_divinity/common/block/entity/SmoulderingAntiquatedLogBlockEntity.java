@@ -1,18 +1,14 @@
 package com.cursee.shards_of_divinity.common.block.entity;
 
 import com.cursee.shards_of_divinity.common.block.basic.SmoulderingAntiquatedLogBlock;
-import com.cursee.shards_of_divinity.common.registry.ModBlockEntitiesForge;
+import com.cursee.shards_of_divinity.common.registry.ModBlockEntityTypesForge;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
-import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -27,7 +23,7 @@ public class SmoulderingAntiquatedLogBlockEntity extends BlockEntity {
 
 
     public SmoulderingAntiquatedLogBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntitiesForge.SMOULDERING_ANTIQUATED_LOG_BLOCK_ENTITY.get(), pPos, pBlockState);
+        super(ModBlockEntityTypesForge.SMOULDERING_ANTIQUATED_LOG_BLOCK_ENTITY.get(), pPos, pBlockState);
     }
 
 //    public void tick(Level pLevel1, BlockPos pPos, BlockState pState1) {

@@ -1,7 +1,7 @@
 package com.cursee.shards_of_divinity.common.block.basic;
 
 import com.cursee.shards_of_divinity.common.block.entity.SmoulderingAntiquatedLogBlockEntity;
-import com.cursee.shards_of_divinity.common.registry.ModBlockEntitiesForge;
+import com.cursee.shards_of_divinity.common.registry.ModBlockEntityTypesForge;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
@@ -19,8 +19,6 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Iterator;
 
 public class SmoulderingAntiquatedLogBlock extends Block implements EntityBlock {
 
@@ -41,7 +39,7 @@ public class SmoulderingAntiquatedLogBlock extends Block implements EntityBlock 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
 //        return new SmoulderingAntiquatedLogBlockEntity(pPos, pState);
-        return ModBlockEntitiesForge.SMOULDERING_ANTIQUATED_LOG_BLOCK_ENTITY.get().create(pPos, pState);
+        return ModBlockEntityTypesForge.SMOULDERING_ANTIQUATED_LOG_BLOCK_ENTITY.get().create(pPos, pState);
     }
 
     @Override

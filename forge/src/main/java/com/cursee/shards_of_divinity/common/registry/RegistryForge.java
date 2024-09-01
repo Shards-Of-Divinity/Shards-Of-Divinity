@@ -2,6 +2,7 @@ package com.cursee.shards_of_divinity.common.registry;
 
 import com.cursee.shards_of_divinity.Constants;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -21,6 +22,7 @@ public class RegistryForge {
     protected static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), Constants.MOD_ID);
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Constants.MOD_ID);
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Constants.MOD_ID);
 
     public static void register(IEventBus modEventBus) {
 
@@ -28,13 +30,15 @@ public class RegistryForge {
         ModItemsForge.register();
         ModTabsForge.register();
 
-        ModBlockEntitiesForge.register();
+        ModBlockEntityTypesForge.register();
+        ModEntityTypesForge.register();
 
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
 
         BLOCK_ENTITY_TYPES.register(modEventBus);
+        ENTITY_TYPES.register(modEventBus);
     }
 
     protected static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
@@ -56,5 +60,9 @@ public class RegistryForge {
 
     protected static <T extends BlockEntityType<?>> RegistryObject<T> registerBlockEntityType(String entityTypeID, Supplier<T> blockEntityType) {
         return BLOCK_ENTITY_TYPES.register(entityTypeID, blockEntityType);
+    }
+
+    protected static <T extends EntityType<?>> RegistryObject<T> registerEntityType(String entityTypeID, Supplier<T> entityType) {
+        return ENTITY_TYPES.register(entityTypeID, entityType);
     }
 }
